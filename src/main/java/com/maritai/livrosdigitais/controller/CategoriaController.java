@@ -1,7 +1,9 @@
 package com.maritai.livrosdigitais.controller;
 
 import com.maritai.livrosdigitais.dto.CategoriaRequestDTO;
+import com.maritai.livrosdigitais.dto.UsuarioRequestDTO;
 import com.maritai.livrosdigitais.model.Categoria;
+import com.maritai.livrosdigitais.model.Usuario;
 import com.maritai.livrosdigitais.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +39,29 @@ public class CategoriaController {
         }
 
         Categoria categoria = new Categoria();
+        categoria.setNome(dto.nome());
+
+        this.repository.save(categoria);
+        return ResponseEntity.ok(categoria);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        Categoria categoria = this.repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada"));
+        this.repository.delete(categoria);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Categoria> update(@PathVariable Integer id, @RequestBody CategoriaRequestDTO dto) {
+        if (dto.nome().isEmpty()) {
+            return ResponseEntity.status(400).build();
+        }
+
+        Categoria categoria = this.repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada"));
+
         categoria.setNome(dto.nome());
 
         this.repository.save(categoria);
