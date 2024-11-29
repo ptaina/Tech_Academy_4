@@ -24,7 +24,7 @@ public class Item {
     private Integer qtd_estoque;
 
     @ManyToOne
-    @JoinColumn(name="categoria_id")
+    @JoinColumn(name="categoria_id", referencedColumnName = "categoria_id")
     private Categoria categoria;
 
     @Column(name = "escritor")
