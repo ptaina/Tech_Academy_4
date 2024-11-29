@@ -1,6 +1,9 @@
 package com.maritai.livrosdigitais.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -19,6 +22,18 @@ public class Usuario {
 
     @Column(name="senha")
     private String senha;
+
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
+    private List<Pedido> pedidos;
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 
     public Integer getId() {
         return id;
