@@ -48,7 +48,7 @@ public class PedidoController {
 
         LocalDate dt_pedido;
         try {
-            dt_pedido = LocalDate.parse(dto.dt_pedido()); // faz com que a data seja no formato string
+            dt_pedido = LocalDate.parse(dto.dt_pedido()); // vira formato string
         } catch (Exception e) {
             return ResponseEntity.status(400).body(null);
         }
