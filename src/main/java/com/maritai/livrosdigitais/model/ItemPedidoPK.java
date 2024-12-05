@@ -3,7 +3,7 @@ package com.maritai.livrosdigitais.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
-import java.math.BigDecimal;
+
 import java.util.Objects;
 
 @Embeddable
@@ -33,7 +33,7 @@ public class ItemPedidoPK {
 
 
     public ItemPedidoPK() {
-        // vazio pq --> cria objts de ItemPedidoPK sem precisar passar argumentos, inseri depois
+
     }
     public ItemPedidoPK(Integer pedido_id, Integer item_id) {
         this.pedido_id = pedido_id;

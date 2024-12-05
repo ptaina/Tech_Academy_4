@@ -3,6 +3,8 @@ package com.maritai.livrosdigitais.model;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table (name = "itens")
@@ -29,6 +31,9 @@ public class Item {
 
     @Column(name = "escritor")
     private String escritor;
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private List<ItemPedido> itensPedido = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -76,5 +81,13 @@ public class Item {
 
     public void setEscritor(String escritor) {
         this.escritor = escritor;
+    }
+
+    public List<ItemPedido> getItensPedido() {
+        return itensPedido;
+    }
+
+    public void setItensPedido(List<ItemPedido> itensPedido) {
+        this.itensPedido = itensPedido;
     }
 }

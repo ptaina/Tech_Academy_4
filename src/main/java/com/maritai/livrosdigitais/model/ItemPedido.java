@@ -9,7 +9,19 @@ import java.math.BigDecimal;
 public class ItemPedido {
 
     @EmbeddedId
-    private ItemPedidoPK id;  // é mapeada aqui
+    private ItemPedidoPK id;
+
+    // mapeamento do n-n
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("pedido_id")
+    @JoinColumn(name = "pedido_id", insertable = false, updatable = false)
+    private Pedido pedido;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("item_id")
+    @JoinColumn(name = "item_id", insertable = false, updatable = false)
+    private Item item;
 
     @Column(name = "quantidade")
     private Integer quantidade;
@@ -40,5 +52,21 @@ public class ItemPedido {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 }
